@@ -35,11 +35,15 @@ const Navbar = () => {
       <div className="section-container flex items-center justify-between">
         <motion.a
           href="#"
-          className="font-display text-2xl font-bold gradient-text"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          className="flex items-center gap-1 group"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          SY
+          <span className="font-display text-2xl font-bold text-primary">&lt;</span>
+          <span className="font-display text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+            Sandesh
+          </span>
+          <span className="font-display text-2xl font-bold text-primary">/&gt;</span>
         </motion.a>
 
         {/* Desktop Navigation */}
