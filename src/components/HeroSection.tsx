@@ -91,8 +91,8 @@ const HeroSection = () => {
           className="flex items-center justify-center gap-6"
         >
           {[
-            { icon: Github, href: 'https://github.com', label: 'GitHub' },
-            { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+            { icon: Github, href: 'https://github.com/Sandesh30-cloud', label: 'GitHub' },
+            { icon: Linkedin, href: 'https://linkedin.com/in/sandesh-yesane-644396259/', label: 'LinkedIn' },
             { icon: Mail, href: 'mailto:sandeshyesane996@gmail.com', label: 'Email' },
           ].map(({ icon: Icon, href, label }) => (
             <motion.a
