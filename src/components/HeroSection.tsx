@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, MapPin, ChevronDown } from 'lucide-react';
+import { Github, Linkedin, Mail, Instagram, MapPin, ChevronDown } from 'lucide-react';
 
 const HeroSection = () => {
   return (
