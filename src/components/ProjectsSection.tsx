@@ -1,7 +1,17 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ExternalLink, Github, Brain, Fish, LayoutDashboard, Database, Cpu, LineChart } from 'lucide-react';
+import {
+  ExternalLink,
+  Github,
+  Brain,
+  Fish,
+  LayoutDashboard,
+  Database,
+  Cpu,
+  LineChart,
+} from 'lucide-react';
+
+/* -------------------- Project Data -------------------- */
 
 const projects = [
   {
@@ -11,12 +21,24 @@ const projects = [
       'Architected and developed a scalable, full-stack LMS for creating, managing, and delivering personalized learning experiences. Leveraged the Gemini API for intelligent course content generation.',
     techStack: ['React', 'Node.js', 'MongoDB', 'Gemini API', 'Express.js'],
     components: [
-      { name: 'AI Content Generator', icon: Brain, desc: 'Dynamic course & assessment generation' },
-      { name: 'Learning Dashboard', icon: LayoutDashboard, desc: 'Progress tracking & analytics' },
-      { name: 'Course Manager', icon: Database, desc: 'CRUD operations for content' },
+      {
+        name: 'AI Content Generator',
+        icon: Brain,
+        desc: 'Dynamic course & assessment generation',
+      },
+      {
+        name: 'Learning Dashboard',
+        icon: LayoutDashboard,
+        desc: 'Progress tracking & analytics',
+      },
+      {
+        name: 'Course Manager',
+        icon: Database,
+        desc: 'CRUD operations for content',
+      },
     ],
     repoUrl: 'https://github.com/Sandesh30-cloud/mentor-mind',
-    gradient: 'from-primary to-secondary',
+    liveUrl: null, // add later if deployed
     featured: true,
   },
   {
@@ -26,14 +48,29 @@ const projects = [
       'Real-time, offline aquaculture monitoring system using IoT sensors with local data storage. Features stereo vision-based fish length estimation using OpenCV and RNN for temporal analysis.',
     techStack: ['Python', 'OpenCV', 'TensorFlow', 'Raspberry Pi', 'ESP32', 'RNN'],
     components: [
-      { name: 'Stereo Vision Module', icon: Fish, desc: 'Dual camera fish measurement' },
-      { name: 'Edge Computing Unit', icon: Cpu, desc: 'Low-latency local processing' },
-      { name: 'Analytics Dashboard', icon: LineChart, desc: 'Real-time data visualization' },
+      {
+        name: 'Stereo Vision Module',
+        icon: Fish,
+        desc: 'Dual camera fish measurement',
+      },
+      {
+        name: 'Edge Computing Unit',
+        icon: Cpu,
+        desc: 'Low-latency local processing',
+      },
+      {
+        name: 'Analytics Dashboard',
+        icon: LineChart,
+        desc: 'Real-time data visualization',
+      },
     ],
-    gradient: 'from-cyan-500 to-blue-600',
+    repoUrl: null, // private / not published
+    liveUrl: null,
     featured: true,
   },
 ];
+
+/* -------------------- Component -------------------- */
 
 const ProjectsSection = () => {
   const ref = useRef(null);
@@ -57,7 +94,7 @@ const ProjectsSection = () => {
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
+        {/* Projects */}
         <div className="space-y-12">
           {projects.map((project, index) => (
             <motion.div
@@ -65,11 +102,10 @@ const ProjectsSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="relative"
             >
               <div className="gradient-border p-8 rounded-2xl card-hover">
                 <div className="grid lg:grid-cols-5 gap-8">
-                  {/* Project Info */}
+                  {/* Left Content */}
                   <div className="lg:col-span-3 space-y-6">
                     <div>
                       <span className="text-xs font-medium text-primary uppercase tracking-wider">
@@ -94,26 +130,37 @@ const ProjectsSection = () => {
 
                     {/* Action Buttons */}
                     <div className="flex gap-4 pt-2">
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm"
-                      >
-                        <Github size={18} />
-                        View Code
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-foreground font-medium text-sm hover:border-primary hover:text-primary transition-colors"
-                      >
-                        <ExternalLink size={18} />
-                        Live Demo
-                      </motion.button>
+                      {project.repoUrl && (
+                        <motion.a
+                          href={project.repoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm"
+                        >
+                          <Github size={18} />
+                          View Code
+                        </motion.a>
+                      )}
+
+                      {project.liveUrl && (
+                        <motion.a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-foreground font-medium text-sm hover:border-primary hover:text-primary transition-colors"
+                        >
+                          <ExternalLink size={18} />
+                          Live Demo
+                        </motion.a>
+                      )}
                     </div>
                   </div>
 
-                  {/* Key Components */}
+                  {/* Right Components */}
                   <div className="lg:col-span-2">
                     <h4 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
                       Key Components
@@ -124,14 +171,19 @@ const ProjectsSection = () => {
                           key={component.name}
                           initial={{ opacity: 0, x: 20 }}
                           animate={isInView ? { opacity: 1, x: 0 } : {}}
-                          transition={{ duration: 0.4, delay: 0.5 + compIndex * 0.1 }}
+                          transition={{
+                            duration: 0.4,
+                            delay: 0.4 + compIndex * 0.1,
+                          }}
                           className="flex items-start gap-3 p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
                         >
                           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <component.icon className="text-primary" size={20} />
+                            <component.icon size={20} className="text-primary" />
                           </div>
                           <div>
-                            <h5 className="font-medium text-sm">{component.name}</h5>
+                            <h5 className="font-medium text-sm">
+                              {component.name}
+                            </h5>
                             <p className="text-xs text-muted-foreground mt-0.5">
                               {component.desc}
                             </p>
