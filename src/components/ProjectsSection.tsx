@@ -15,6 +15,7 @@ const projects = [
       { name: 'Learning Dashboard', icon: LayoutDashboard, desc: 'Progress tracking & analytics' },
       { name: 'Course Manager', icon: Database, desc: 'CRUD operations for content' },
     ],
+    repoUrl: 'https://github.com/Sandesh30-cloud/mentor-mind',
     gradient: 'from-primary to-secondary',
     featured: true,
   },
